@@ -25,3 +25,17 @@ Route::post('/login', [AuthController::class, 'login'])
 // Logout
 Route::post('/logout', [AuthController::class, 'logout'])
     ->name('logout');
+
+// Halaman khusus admin
+Route::middleware(['role:admin'])->group(function () {
+    Route::get('/admin/dashboard', function () {
+        return 'Selamat datang di Dashboard Admin!';
+    })->name('admin.dashboard');
+});
+
+// Halaman khusus customer
+Route::middleware(['role:customer'])->group(function () {
+    Route::get('/customer/dashboard', function () {
+        return 'Selamat datang di Dashboard Customer!';
+    })->name('customer.dashboard');
+});
